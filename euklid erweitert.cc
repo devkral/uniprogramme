@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 #include <cstdlib>
 
 using namespace std;
@@ -11,17 +10,9 @@ int main(int argc, char *argv[])
 int a=atoi(argv[1]); //y
 int b=atoi(argv[2]); 
 int ggt,br;
-if (a>b)
-{
 	ggt=a;
 	br=b; //b/rest
-}
-else
-{
-	ggt=b; //vertausche
-	br=a; 
-}
-int x=1, y=0, xalt=0, xneu, yalt=1, yneu; // Koeffizienten von a, b xalt = u yalt= v
+int x=1, y=0, xalt=0, xneu, yalt=1, yneu; // Koeffizienten von a, b x = u y= v
 //1*a+0*b=a, 0*a+1*b=b
 //y*a+yalt*b=a, xalt*a+x*b=b
 int q=0,restb=0; //
@@ -53,9 +44,7 @@ while (br!=0)
 	cout << counter << " yneu:" << yneu << " yalt:" << yalt << " y:" << y << endl; //Trick: da rest Teiler von T(a) ∩ T(b) ist
 
 }
-if (a>b) //wegen Vertauschung
-	cout << "ggt:" << ggt << " = " << xalt << "*" << b << "+" << yalt << "*" << a << "\n";
-else
-	cout << "ggt:" << ggt << " = " << xalt << "*" << a << "+" << yalt << "*" << b << "\n";
+//benutze nicht x und y sondern deren alten versionen weil sonst 0 (da letzte rechnung 0 ergibt) 
+cout << "ggt:" << ggt << " = " << xalt << "*" << b << "+" << yalt << "*" << a << "\n";
 return 0;
 }
