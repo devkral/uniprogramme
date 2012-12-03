@@ -11,39 +11,38 @@ private:
 //limit;
 unsigned long int counter;
 
-
 void teilerfinder(unsigned long int zahl)
 {
 	counter++;
-	unsigned long int limit=ceil(sqrt(zahl));
-	unsigned long int teilerneu=2;
+	unsigned long long int limit=ceil(sqrt(zahl));
+	unsigned long long int teiler=2;
 	if (zahl&1)
 	{
-		teilerneu=3;
+		teiler=3;
 	}
 	//	cout << "recursive: " << teilerneu << "  " << zahl << endl;
-	while (zahl%teilerneu!=0 && teilerneu<=limit && counter<100000)
+	while (zahl%teiler!=0 && teiler<=limit && counter<10000000000000000)
 	{
 		
 		counter++;
-		teilerneu+=2;
+		teiler+=2;
 	}
-	if(teilerneu<=limit && counter < 100000)
+	if(teiler<=limit && counter < 10000000000000000)
 	{
-		cout << teilerneu << "*";
-		teilerfinder(zahl/teilerneu);
+		cout << teiler << "*";
+		teilerfinder(zahl/teiler);
 	}
 	//else
 	//	cout << "*1";
-	if(teilerneu>limit)
+	if(teiler>limit)
 		cout << zahl << "*1";
 	
 }
 public:
-primfaktor(long int input)
+primfaktor(long long int input)
 {
 	//limit=ceil(sqrt(input));
-	unsigned long int input2;
+	unsigned long long int input2;
 	counter=0;
 	if (input < 0)
 	{
@@ -70,6 +69,6 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 	
-	primfaktor(atol(argv[1]));
+	primfaktor(atoll(argv[1]));
 	return 0;
 }

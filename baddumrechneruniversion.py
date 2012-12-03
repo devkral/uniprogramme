@@ -86,7 +86,8 @@ while zahlcalc!=0:
 	
 for counter4 in range(0,len(lowtohigh)):
 	print("z"+str(counter4)+":"+str(lowtohigh[counter4]),end=" ")
-print("Oder:")
+print("Oder:\n(",end="")
+
 for counter3 in range(len(lowtohigh)-1,-1,-1):
 	print(str(lowtohigh[counter3]),end="")
-print()
+print(")"+str(stellwertout))

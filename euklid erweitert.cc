@@ -12,13 +12,13 @@ int b=atoi(argv[2]);
 int ggt,br;
 	ggt=a;
 	br=b; //b/rest
-int x=1, y=0, xalt=0, xneu, yalt=1, yneu; // Koeffizienten von a, b x = u y= v
+int x=0, y=1, xalt=1, xneu, yalt=0, yneu; // Koeffizienten von a, b x = u y= v
 //1*a+0*b=a, 0*a+1*b=b
-//y*a+yalt*b=a, xalt*a+x*b=b
+//y*a+yalt*b=a, x*a+xalt*b=b
 int q=0,restb=0; //
 int counter=0;
-cout << counter << " xneu:" << "-" << " xalt:" << xalt << " x:" << x << endl; //Trick: da rest Teiler von T(a) ∩ T(b) ist
-cout << counter << " yneu:" << "-" << " yalt:" << yalt << " y:" << y << endl; //Trick: da rest Teiler von T(a) ∩ T(b) ist
+ cout << counter << " b:" << b << " xneu:" << "uninitialized" << " xalt:" << xalt << " x:" << x << endl; //Trick: da rest Teiler von T(a) ∩ T(b) ist
+ cout << counter << " a:" << a << " yneu:" << "uninitialized" << " yalt:" << yalt << " y:" << y << endl; //Trick: da rest Teiler von T(a) ∩ T(b) ist
 
 
 while (br!=0)
@@ -35,16 +35,19 @@ while (br!=0)
 	xneu= xalt -(q * x);
 	//cout << counter << " xneu:" << xneu << " xalt:" << xalt << " x:" << x << endl; //Trick: da rest Teiler von T(a) ∩ T(b) ist
 	xalt=x; x=xneu; //verschiebe nach x
-	cout << counter << " xneu:" << xneu << " xalt:" << xalt << " x:" << x << endl; //Trick: da rest Teiler von T(a) ∩ T(b) ist
+	cout << counter  << " br:" << br  << " xneu:" << xneu << " xalt:" << xalt << " x:" << x << endl; //Trick: da rest Teiler von T(a) ∩ T(b) ist
 
 	//verstehen
 	yneu=yalt-(q * y);
 	//cout << counter << " yneu:" << yneu << " yalt:" << yalt << " y:" << y << endl; //Trick: da rest Teiler von T(a) ∩ T(b) ist
 	yalt=y; y=yneu; //verschiebe nach y
-	cout << counter << " yneu:" << yneu << " yalt:" << yalt << " y:" << y << endl; //Trick: da rest Teiler von T(a) ∩ T(b) ist
+	cout << counter << "ggt:" << ggt << " yneu:" << yneu << " yalt:" << yalt << " y:" << y << endl; //Trick: da rest Teiler von T(a) ∩ T(b) ist
 
 }
 //benutze nicht x und y sondern deren alten versionen weil sonst 0 (da letzte rechnung 0 ergibt) 
-cout << "ggt:" << ggt << " = " << xalt << "*" << b << "+" << yalt << "*" << a << "\n";
+cout << "ggt=yalt*a+xalt*b" << "\n";
+cout << "ggt = a * xalt(u) + b * yalt (v)\n";
+cout << "ggt:" << ggt << " = " << a << "*" << xalt << "+" << b << "*" << yalt << "\n";
+
 return 0;
 }
