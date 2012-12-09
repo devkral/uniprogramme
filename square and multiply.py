@@ -2,20 +2,16 @@
 import sys
 import os
 
-def testgerade(u):
-	if 1&u:
-		return 0 #false
-	else:
-		return 1 #true
-
 
 def squareandmultiply(a,potenz,mod):
-	if potenz < 1:
-		return a
-	status=testgerade(potenz)
+	if potenz == 0: #case potenz = 0
+		return 1
+	if potenz < 2:
+		return a%mod
+	status=1&potenz
 	potenz=potenz>>1
 	
-	if status==0:
+	if status==1:
 		return (squareandmultiply((a*a)%mod,potenz,mod)*a)%mod
 	else:
 		return (squareandmultiply((a*a)%mod,potenz,mod))%mod
