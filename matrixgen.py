@@ -90,12 +90,12 @@ def matrixausgabe(matrix):
 				elif elem==1:
 					print (" ",end="")
 				len0=len(str(x[0]))
-				len1=len(str(x[1]))
-				if len0>len1:
-					for leelem in range(len1,len0+1):
+				len1=len(str(x[1])) 
+				if len0>len1 and elem==1:
+					for leelem in range(len1,len0):
 						print (" ",end="")
 				else:
-					for leelem in range(len0,len1+1):
+					for leelem in range(len0,len1):
 						print (" ",end="")
 				print(" ",end="")
 			
