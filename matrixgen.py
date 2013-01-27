@@ -56,7 +56,7 @@ def easebruch(bruch):
 	try:
 		tmpbruch=[int(bruch[0]),int(bruch[1])]
 	except TypeError:
-		print("Not valid")
+		print(str(bruch)+" Not valid")
 		return bruch
 	
 	if tmpbruch[0]%tmpbruch[1]==0:
@@ -92,10 +92,10 @@ def matrixausgabe(matrix):
 				len0=len(str(x[0]))
 				len1=len(str(x[1]))
 				if len0>len1:
-					for leelem in range(len1,len0):
+					for leelem in range(len1,len0+1):
 						print (" ",end="")
 				else:
-					for leelem in range(len0,len1):
+					for leelem in range(len0,len1+1):
 						print (" ",end="")
 				print(" ",end="")
 			
@@ -154,17 +154,19 @@ def negate(elem):
 	return tmp
 
 def multzeile(zeile, multi):
+	tempzeile=[]
 	for ttt in zeile:
-		ttt=mult(ttt,multi)
-	return zeile
+		tempzeile.append(mult(ttt,multi))
+	return tempzeile
 
 def inzeilenaddition(zeile1,zeiles, multi):
 	zeiletemp=[]
 	if len(zeile1)!=len(zeiles):
 		print("Error: Zeilenlänge verschieden")
+		exit(1)
 	for element in range(0,len(zeile1)):
-		zeiletemp.append(add(zeile1[element],mult(zeiles[element],multi)))
-	return easebruch(zeiletemp)
+		zeiletemp.append(easebruch(add(zeile1[element],mult(zeiles[element],multi))))
+	return zeiletemp
 
 
 
@@ -172,7 +174,6 @@ def zeilentausch(matrix,zeile1,zeile2):
 	zeiletemp=matrix[zeile1]
 	matrix[zeile1]=matrix[zeile2]
 	matrix[zeile2]=zeiletemp
-	print ("tausche zeile "+str(zeile1)+" mit zeile: "+str(zeile2))
 	return matrix
 
 def convdigit(matrix):
@@ -194,12 +195,18 @@ def gauss(matrix1,matrix2):
 		exit(1)
 	
 	for spalte in range(0,len(matrix1[0])):
+		print("Pivo counter: "+str(pivo))
+		if pivo>=len(matrix1):
+			print("Finished")
+			break
+		
 		if matrix1[pivo][spalte][0]!=0:
 			iszero=False
 		else:
 			iszero=True
 			for zeile in range(pivo,len(matrix1)):
-				if matrix1[zeile][spalte][0]!=0:
+				if matrix1[zeile][spalte][0]!=0 and pivo!=zeile:
+					print("Tausche Zeile: "+str(zeile)+" mit Zeile: "+str(pivo))
 					matrix1=zeilentausch(matrix1,zeile,pivo)
 					matrix2=zeilentausch(matrix2,zeile,pivo)
 					iszero=False
@@ -210,26 +217,31 @@ def gauss(matrix1,matrix2):
 			#simplify
 			for zeile in range(pivo,len(matrix1)):
 				if matrix1[zeile][spalte][0]==1 and matrix1[zeile][spalte][1]==1:
+					print("Tausche Zeile: "+str(zeile)+" mit Zeile: "+str(pivo)+" da 1")
 					matrix1=zeilentausch(matrix1,zeile,pivo)
 					matrix2=zeilentausch(matrix2,zeile,pivo)
 					break
-			if matrix1[pivo][spalte]==0:
-				print("Error");
+			print("Pivotiere mit: "+str(matrix1[pivo][spalte][0])+"/"+str(matrix1[pivo][spalte][1]))
 			
 			for zeile in range(0,len(matrix1)):
 				if zeile!=pivo:
 					tozero=negate(div(matrix1[zeile][spalte],matrix1[pivo][spalte]))
+					print("Addiere "+str(tozero[0])+"/"+str(tozero[1])+" des pivot elements zur Zeile: "+str(zeile))
 					matrix1[zeile]=inzeilenaddition(matrix1[zeile],matrix1[pivo],tozero)
 					if matrix1[zeile][spalte][0]!=0:
 						print("Error: not zero, tozero is: "+str(tozero)+"zeile (number "+str(zeile)+") pivo: "+str(pivo))
 					matrix2[zeile]=inzeilenaddition(matrix2[zeile],matrix2[pivo],tozero)
 				else:
-					print("Zeile: "+str(zeile))
+					print("Zeile: "+str(matrix1[zeile]))
 			if matrix1[pivo][spalte][0]!=1 or matrix1[pivo][spalte][1]!=1:
 				toone=div(einszahlelem,matrix1[pivo][spalte])
+				print("Multiply line to fit; Multiplier: "+str(toone))
 				matrix1[pivo]=multzeile(matrix1[pivo],toone)
 				matrix2[pivo]=multzeile(matrix2[pivo],toone)
 			pivo+=1
+			
+		else:
+			print("Do nothing cause zero")
 			
 	return [matrix1,matrix2]
 
@@ -302,7 +314,7 @@ elif sys.argv[1]=="g":
 	mat1=matrixgen()
 	print("Enter Matrix 2:")
 	mat2=matrixgen()
-	print("Now Gauss, eliminate!!!")
+	print("Now Gausselimination:")
 	tempmat=gauss(mat1,mat2)
 	print("Matrix1:")
 	matrixausgabe(tempmat[0])
