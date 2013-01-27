@@ -3,4 +3,11 @@
 def usage():
 	print("Usage:")
 	print("program <generate>")
-	print("program <decode/encode> <(n b)/(p q a)>  <zahl>")
+	print("program <encode/decode> <(n b)/(p q a)>  <zahl>")
+	
+#noch nicht implementiert
+if 	
+
+
+#generate n
+if 
