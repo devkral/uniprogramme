@@ -36,7 +36,6 @@ void teilerfinder(unsigned long int zahl)
 	//	cout << "*1";
 	if(teiler>limit)
 		cout << zahl << "*1";
-	
 }
 public:
 primfaktor(long long int input)
@@ -55,8 +54,6 @@ primfaktor(long long int input)
 	
 	cout << "\nNach: " << counter << " Iterationen\n";
 }
-
-
 };
 
 int main(int argc, char *argv[])
@@ -68,7 +65,8 @@ int main(int argc, char *argv[])
 		cout << "Error: no number.\n";
 		return 1;
 	}
+	long long int t=atoll(argv[1]);
 	
-	primfaktor(atoll(argv[1]));
+	primfaktor(t);
 	return 0;
 }

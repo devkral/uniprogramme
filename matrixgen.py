@@ -231,8 +231,7 @@ def gauss(matrix1,matrix2):
 					if matrix1[zeile][spalte][0]!=0:
 						print("Error: not zero, tozero is: "+str(tozero)+"zeile (number "+str(zeile)+") pivo: "+str(pivo))
 					matrix2[zeile]=inzeilenaddition(matrix2[zeile],matrix2[pivo],tozero)
-				else:
-					print("Zeile: "+str(matrix1[zeile]))
+
 			if matrix1[pivo][spalte][0]!=1 or matrix1[pivo][spalte][1]!=1:
 				toone=div(einszahlelem,matrix1[pivo][spalte])
 				print("Multiply line to fit; Multiplier: "+str(toone))
@@ -241,7 +240,7 @@ def gauss(matrix1,matrix2):
 			pivo+=1
 			
 		else:
-			print("Do nothing cause zero")
+			print("Do nothing because zero")
 			
 	return [matrix1,matrix2]
 
